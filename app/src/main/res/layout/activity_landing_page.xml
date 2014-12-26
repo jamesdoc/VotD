@@ -31,7 +31,9 @@
         <TextView
             android:id="@+id/votdResponse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_body_2_material"
+            android:textIsSelectable="true" />
 
         <RelativeLayout
             android:id="@+id/InnerRelativeLayout"
@@ -39,12 +41,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true" >
 
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
             <TextView
                 android:id="@+id/data_from"
                 android:text="@string/data_from"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <TextView
                 android:id="@+id/votdCopyright"
@@ -52,7 +60,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/data_from"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textSize="@dimen/abc_text_size_caption_material"
+                android:textColor="@color/caption" />
         </RelativeLayout>
 
     </RelativeLayout>

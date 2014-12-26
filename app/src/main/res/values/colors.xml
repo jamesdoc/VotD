@@ -5,6 +5,6 @@
     <color name="primary_dark">#004D40</color>
     <color name="accent">#B2DFDB</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="caption">#BDBDBD</color>
 
 </resources>

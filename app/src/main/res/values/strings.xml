@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Verse of the Day</string>
+    <string name="data_from">Powered by <a href="http://www.biblegateway.com">Bible Gateway\'s</a> Verse of the Day</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

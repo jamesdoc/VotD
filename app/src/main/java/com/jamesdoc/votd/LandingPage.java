@@ -2,6 +2,7 @@ package com.jamesdoc.votd;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.io.BufferedReader;
@@ -12,6 +13,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -107,6 +112,19 @@ public class LandingPage extends ActionBarActivity {
         protected void onPostExecute(String result) {
             Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
             votdResponse.setText(result);
+
+            try{
+                JSONObject json_votd = new JSONObject(result);
+                json_votd = json_votd.getJSONObject("votd");
+
+                String verse_content = json_votd.getString("content");
+
+                votdResponse.setText(Html.fromHtml(verse_content));
+
+
+            } catch (JSONException e){
+                throw new RuntimeException(e);
+            }
         }
     }
 

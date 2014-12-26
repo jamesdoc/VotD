@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.io.BufferedReader;
@@ -33,6 +34,7 @@ public class LandingPage extends ActionBarActivity {
     TextView votdResponse;
     TextView votdReference;
     TextView votdCopyright;
+    TextView data_from;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -53,21 +55,22 @@ public class LandingPage extends ActionBarActivity {
         votdResponse = (TextView) findViewById(R.id.votdResponse);
         votdReference = (TextView) findViewById(R.id.votdReference);
         votdCopyright = (TextView) findViewById(R.id.votdCopyright);
+        data_from = (TextView) findViewById(R.id.data_from);
 
-        // check if you are connected or not
+        // If the app is connected then go fetch some JSON
         if(isConnected()){
             new HttpAsyncTask().execute(call_url);
         }
 
+        // Build navigation drawer
         String[] values = new String[] { "One", "Two", "Three" };
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navList);
-
         ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.nav_drawer, values);
         mDrawerList.setAdapter(ad);
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
-//        mDrawerList.setAdapter(adapter);
+        // Enable links within various strings
+        data_from.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 

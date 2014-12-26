@@ -14,6 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/votdReference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/votdResponse" />
+
+    <TextView
+        android:id="@+id/votdCopyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/votdReference" />
+
 
     <RelativeLayout
         android:id="@+id/InnerRelativeLayout"

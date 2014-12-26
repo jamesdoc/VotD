@@ -30,6 +30,8 @@ import android.app.Activity;
 
 public class LandingPage extends ActionBarActivity {
     TextView votdResponse;
+    TextView votdReference;
+    TextView votdCopyright;
     String votd_url = "https://www.biblegateway.com/votd/get/?format=json&version=";
     String version = "nivuk";
     String call_url = votd_url.concat(version);
@@ -41,6 +43,8 @@ public class LandingPage extends ActionBarActivity {
         setContentView(R.layout.activity_landing_page);
         // get reference to the views
         votdResponse = (TextView) findViewById(R.id.votdResponse);
+        votdReference = (TextView) findViewById(R.id.votdReference);
+        votdCopyright = (TextView) findViewById(R.id.votdCopyright);
 
         // check if you are connected or not
         if(isConnected()){
@@ -111,15 +115,19 @@ public class LandingPage extends ActionBarActivity {
         @Override
         protected void onPostExecute(String result) {
             Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
-            votdResponse.setText(result);
+            //votdResponse.setText(result);
 
             try{
                 JSONObject json_votd = new JSONObject(result);
                 json_votd = json_votd.getJSONObject("votd");
 
                 String verse_content = json_votd.getString("content");
+                String verse_reference = json_votd.getString("display_ref");
+                String version_copyright = json_votd.getString("copyright");
 
                 votdResponse.setText(Html.fromHtml(verse_content));
+                votdReference.setText(verse_reference);
+                votdCopyright.setText(Html.fromHtml(version_copyright));
 
 
             } catch (JSONException e){

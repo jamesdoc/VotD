@@ -1,5 +1,6 @@
 package com.jamesdoc.votd;
 
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,16 +15,15 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
@@ -33,6 +33,10 @@ public class LandingPage extends ActionBarActivity {
     TextView votdResponse;
     TextView votdReference;
     TextView votdCopyright;
+
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+
     String votd_url = "https://www.biblegateway.com/votd/get/?format=json&version=";
     String version = "nivuk";
     String call_url = votd_url.concat(version);
@@ -53,13 +57,18 @@ public class LandingPage extends ActionBarActivity {
         // check if you are connected or not
         if(isConnected()){
             new HttpAsyncTask().execute(call_url);
-        } else{
-
         }
 
+        String[] values = new String[] { "One", "Two", "Three" };
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.navList);
 
+        ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.nav_drawer, values);
+        mDrawerList.setAdapter(ad);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
+//        mDrawerList.setAdapter(adapter);
     }
-
 
 
     public static String GET(String url){

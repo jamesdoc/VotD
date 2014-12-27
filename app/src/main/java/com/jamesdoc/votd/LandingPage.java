@@ -23,6 +23,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ public class LandingPage extends ActionBarActivity {
     TextView votdReference;
     TextView votdCopyright;
     TextView data_from;
+    ViewGroup app_body;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -52,6 +55,7 @@ public class LandingPage extends ActionBarActivity {
 
         setContentView(R.layout.activity_landing_page);
         // get reference to the views
+        app_body = (ViewGroup)findViewById(R.id.main_body);
         votdResponse = (TextView) findViewById(R.id.votdResponse);
         votdReference = (TextView) findViewById(R.id.votdReference);
         votdCopyright = (TextView) findViewById(R.id.votdCopyright);
@@ -62,12 +66,16 @@ public class LandingPage extends ActionBarActivity {
             new HttpAsyncTask().execute(call_url);
         }
 
+        // Load in setting page
+//        app_body.removeAllViews();
+//        app_body.addView(View.inflate(this, R.layout.settings_page, null));
+
         // Build navigation drawer
-        String[] values = new String[] { "One", "Two", "Three" };
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.navList);
-        ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.nav_drawer, values);
-        mDrawerList.setAdapter(ad);
+//        String[] values = new String[] { "One", "Two", "Three" };
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerList = (ListView) findViewById(R.id.navList);
+//        ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.nav_drawer, values);
+//        mDrawerList.setAdapter(ad);
 
         // Enable links within various strings
         data_from.setMovementMethod(LinkMovementMethod.getInstance());

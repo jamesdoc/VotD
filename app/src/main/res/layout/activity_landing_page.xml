@@ -4,76 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".LandingPage">
-
-        <TextView
-            android:id="@+id/votdReference"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary"
-            android:textColor="@color/white"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:gravity="bottom|center"
-            android:textSize="@dimen/abc_text_size_display_1_material"
-            android:minHeight="150dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:layout_below="@id/votdReference">
-
-            <TextView
-                android:id="@+id/votdResponse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/abc_text_size_body_2_material"
-                android:textIsSelectable="true" />
-
-            <RelativeLayout
-                android:id="@+id/InnerRelativeLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true" >
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray"/>
-
-                <TextView
-                    android:id="@+id/data_from"
-                    android:text="@string/data_from"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="@dimen/activity_vertical_margin"/>
-
-                <TextView
-                    android:id="@+id/votdCopyright"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/data_from"
-                    android:paddingTop="@dimen/activity_vertical_margin"
-                    android:gravity="center"
-                    android:textSize="@dimen/abc_text_size_caption_material"
-                    android:textColor="@color/caption" />
-            </RelativeLayout>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
+    <include
+        layout="@layout/main_page"
+        android:id="@+id/main_body"/>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -101,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:src="@drawable/logo_large"
+                android:contentDescription="@string/logo_desc"
                 android:id="@+id/logo_image"/>
 
             <TextView
@@ -117,11 +51,30 @@
 
         </LinearLayout>
 
-        <ListView android:id="@+id/navList"
+        <TextView
+            android:id="@+id/btn_settings"
+            android:textColor="#fff"
+            android:padding="5sp"
+            android:layout_width="fill_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:singleLine="true"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/action_settings"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <ListView
+            android:id="@+id/navList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="#fff"
-            android:layout_below="@id/logo_container" />
+            android:textColor="#fff" />
 
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

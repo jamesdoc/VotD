@@ -74,7 +74,7 @@ public class LandingPage extends ActionBarActivity {
 //        String[] values = new String[] { "One", "Two", "Three" };
 //        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 //        mDrawerList = (ListView) findViewById(R.id.navList);
-//        ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.nav_drawer, values);
+//        ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.nav_drawer_list, values);
 //        mDrawerList.setAdapter(ad);
 
         // Enable links within various strings

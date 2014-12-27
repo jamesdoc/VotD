@@ -38,6 +38,7 @@ public class LandingPage extends ActionBarActivity {
     TextView votdCopyright;
     TextView data_from;
     ViewGroup app_body;
+    Toast loading_toast;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -61,14 +62,7 @@ public class LandingPage extends ActionBarActivity {
         votdCopyright = (TextView) findViewById(R.id.votdCopyright);
         data_from = (TextView) findViewById(R.id.data_from);
 
-        // If the app is connected then go fetch some JSON
-        if(isConnected()){
-            new HttpAsyncTask().execute(call_url);
-        }
-
-        // Load in setting page
-//        app_body.removeAllViews();
-//        app_body.addView(View.inflate(this, R.layout.settings_page, null));
+        getVerse();
 
         // Build navigation drawer
 //        String[] values = new String[] { "One", "Two", "Three" };
@@ -138,10 +132,9 @@ public class LandingPage extends ActionBarActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
-            //votdResponse.setText(result);
 
             try{
+
                 JSONObject json_votd = new JSONObject(result);
                 json_votd = json_votd.getJSONObject("votd");
 
@@ -160,28 +153,40 @@ public class LandingPage extends ActionBarActivity {
         }
     }
 
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_landing_page, menu);
-        return true;
+    public void openSettings(View view) {
+        app_body.removeAllViews();
+        app_body.addView(View.inflate(this, R.layout.settings_page, null));
+        closeDrawer(view);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void openMain(View view) {
+        app_body.removeAllViews();
+        app_body.addView(View.inflate(this, R.layout.main_page, null));
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        app_body = (ViewGroup)findViewById(R.id.main_body);
+        votdResponse = (TextView) findViewById(R.id.votdResponse);
+        votdReference = (TextView) findViewById(R.id.votdReference);
+        votdCopyright = (TextView) findViewById(R.id.votdCopyright);
+        data_from = (TextView) findViewById(R.id.data_from);
+
+        getVerse();
+
+        closeDrawer(view);
+    }
+
+    public void getVerse(){
+        // If the app is connected then go fetch some JSON
+        if(isConnected()){
+            Toast loading_toast = Toast.makeText(getBaseContext(), "Looking up verse...", Toast.LENGTH_SHORT);
+            loading_toast.show();
+            new HttpAsyncTask().execute(call_url);
+        } else {
+            Toast.makeText(getBaseContext(), "No internet connection.", Toast.LENGTH_LONG).show();
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void closeDrawer(View view) {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.closeDrawers();
     }
 }

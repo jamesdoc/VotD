@@ -8,6 +8,27 @@
         layout="@layout/main_page"
         android:id="@+id/main_body"/>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/hamburger"
+            android:clickable="true"
+            android:onClick="openDrawer"
+            android:contentDescription="@string/img_menu"
+            android:id="@+id/btn_menu" />
+
+    </RelativeLayout>
+
     <include
         layout="@layout/nav_drawer"
         android:id="@+id/nav_drawer"/>

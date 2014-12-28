@@ -33,17 +33,33 @@
         android:layout_below="@id/votdReference">
 
         <TextView
-            android:id="@+id/votdResponse"
-            android:layout_width="match_parent"
+            android:id="@+id/lbl_translation"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/abc_text_size_body_2_material"
-            android:textIsSelectable="true" />
+            android:text="@string/settings_translation"
+            android:layout_alignParentLeft="true"/>
 
-        <RelativeLayout
+        <Spinner
+            android:id="@+id/translations_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/lbl_translation"/>
+
+        <LinearLayout
             android:id="@+id/InnerRelativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" >
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnSettingsSave"
+                android:text="@string/settings_save"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:onClick="saveSettings"/>
 
             <View
                 android:layout_width="fill_parent"
@@ -58,7 +74,7 @@
                 android:gravity="center"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 

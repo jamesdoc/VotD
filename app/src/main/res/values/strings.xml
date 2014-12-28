@@ -4,8 +4,21 @@
     <string name="app_name">Verse of the Day</string>
     <string name="logo_desc">Verse of the Day logo</string>
     <string name="data_from">Powered by <a href="http://biblegateway.com">Bible Gateway\'s</a> Verse of the Day</string>
-    <string name="action_settings">Settings</string>
 
+    <string name="img_menu">Menu</string>
+    <string name="img_closeMenu">Close menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="settings_save">Save settings</string>
+    <string name="settings_translation">Bible translation:</string>
+    <string-array name="settings_translations">
+        <item>NIV</item>
+        <item>NIVUK</item>
+        <item>ESV</item>
+        <item>GNT</item>
+        <item>KJV</item>
+        <item>MSG</item>
+        <item>NRSV</item>
+    </string-array>
     <string name="made_by">Made by <a href="http://jamesdoc.com">James Doc</a></string>
 
 </resources>

@@ -1,11 +1,14 @@
 package com.jamesdoc.votd;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import java.io.BufferedReader;
@@ -27,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
@@ -43,9 +47,7 @@ public class LandingPage extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-    String votd_url = "https://www.biblegateway.com/votd/get/?format=json&version=";
-    String version = "nivuk";
-    String call_url = votd_url.concat(version);
+    String VOTD_URL = "https://www.biblegateway.com/votd/get/?format=json&version=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +158,17 @@ public class LandingPage extends ActionBarActivity {
     public void openSettings(View view) {
         app_body.removeAllViews();
         app_body.addView(View.inflate(this, R.layout.settings_page, null));
+
+        String version = getTranslation();
+        Spinner spinner = (Spinner) findViewById(R.id.translations_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.settings_translations, android.R.layout.simple_spinner_item);
+
+        int spinnerPosition = adapter.getPosition(version);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setSelection(spinnerPosition);
+
         closeDrawer(view);
     }
 
@@ -174,10 +187,30 @@ public class LandingPage extends ActionBarActivity {
         closeDrawer(view);
     }
 
+    public void saveSettings(View view) {
+        Spinner mySpinner=(Spinner) findViewById(R.id.translations_spinner);
+        String translation = mySpinner.getSelectedItem().toString();
+
+        SharedPreferences preferences = getSharedPreferences("VOTD_PREF", MODE_PRIVATE);
+        SharedPreferences.Editor edit= preferences.edit();
+
+        edit.putString("translation", translation);
+        edit.commit();
+
+        openMain(view);
+    }
+
     public void getVerse(){
         // If the app is connected then go fetch some JSON
         if(isConnected()){
             Toast loading_toast = Toast.makeText(getBaseContext(), "Looking up verse...", Toast.LENGTH_SHORT);
+
+            String version = getTranslation();
+
+            Log.i("Version", version);
+
+            String call_url = VOTD_URL.concat(version);
+
             loading_toast.show();
             new HttpAsyncTask().execute(call_url);
         } else {
@@ -188,5 +221,15 @@ public class LandingPage extends ActionBarActivity {
     public void closeDrawer(View view) {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.closeDrawers();
+    }
+
+    public void openDrawer(View view) {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.openDrawer(Gravity.START);
+    }
+
+    public String getTranslation(){
+        SharedPreferences settings = getSharedPreferences("VOTD_PREF", 0);
+        return settings.getString("translation", "nivuk");
     }
 }
